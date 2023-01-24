@@ -56,7 +56,7 @@ export function Collaborator() {
       <h3>List collaborators</h3>
       {collaborators.map((collaborator) => (
         <>
-          <h4>{collaborator.collaborator}</h4>
+          <h4 key={collaborator.uuid}>{collaborator.collaborator}</h4>
           <button>Update</button>
           <button onClick={() => deleteCollaborator(collaborator)}>
             Delete
