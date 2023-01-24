@@ -54,15 +54,17 @@ export function Collaborator() {
       <button onClick={addCollaborator}>Add Collaborator</button>
 
       <h3>List collaborators</h3>
-      {collaborators.map((collaborator) => (
-        <>
-          <h4 key={collaborator.uuid}>{collaborator.collaborator}</h4>
-          <button>Update</button>
-          <button onClick={() => deleteCollaborator(collaborator)}>
-            Delete
-          </button>
-        </>
-      ))}
+      {collaborators.map((collaborator) => {
+        return (
+          <>
+            <h4 key={collaborator.uuid}>{collaborator.collaborator}</h4>
+            <button>Update</button>
+            <button onClick={() => deleteCollaborator(collaborator)}>
+              Delete
+            </button>
+          </>
+        );
+      })}
     </>
   );
 }
