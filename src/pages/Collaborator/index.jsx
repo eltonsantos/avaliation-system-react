@@ -1,4 +1,4 @@
-import { onValue, ref, remove, set } from "firebase/database";
+import { onValue, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { uid } from "uid";
 import { Menu } from "../../components/Menu";
@@ -8,6 +8,7 @@ export function Collaborator() {
   const [collaborator, setCollaborator] = useState("");
   const [collaborators, setCollaborators] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [tempId, setTempId] = useState("");
 
   function handleCollaboratorChange(e) {
     setCollaborator(e.target.value);
@@ -35,6 +36,22 @@ export function Collaborator() {
     setCollaborator("");
   }
 
+  function updateCollaborator(collaborator) {
+    setIsEdit(true);
+    setTempId(collaborator.uuid);
+    setCollaborator(collaborator.collaborator);
+  }
+
+  function handleUpdateChange() {
+    update(ref(db, `/${tempId}`), {
+      collaborator,
+      uuid: tempId,
+    });
+
+    setCollaborator("");
+    setIsEdit(false);
+  }
+
   function deleteCollaborator(collaborator) {
     remove(ref(db, `/${collaborator.uuid}`));
   }
@@ -51,14 +68,30 @@ export function Collaborator() {
         onChange={handleCollaboratorChange}
         placeholder="Add Collaborator"
       />
-      <button onClick={addCollaborator}>Add Collaborator</button>
+      {isEdit ? (
+        <>
+          <button onClick={handleUpdateChange}>Update Collaborator</button>
+          <button
+            onClick={() => {
+              setIsEdit(false);
+              setCollaborator("");
+            }}
+          >
+            X
+          </button>
+        </>
+      ) : (
+        <button onClick={addCollaborator}>Add Collaborator</button>
+      )}
 
       <h3>List collaborators</h3>
       {collaborators.map((collaborator) => {
         return (
           <>
             <h4 key={collaborator.uuid}>{collaborator.collaborator}</h4>
-            <button>Update</button>
+            <button onClick={() => updateCollaborator(collaborator)}>
+              Update
+            </button>
             <button onClick={() => deleteCollaborator(collaborator)}>
               Delete
             </button>
