@@ -85,19 +85,21 @@ export function Collaborator() {
       )}
 
       <h3>List collaborators</h3>
-      {collaborators.map((collaborator) => {
-        return (
-          <>
-            <h4 key={collaborator.uuid}>{collaborator.collaborator}</h4>
-            <button onClick={() => updateCollaborator(collaborator)}>
-              Update
-            </button>
-            <button onClick={() => deleteCollaborator(collaborator)}>
-              Delete
-            </button>
-          </>
-        );
-      })}
+      <ul>
+        {collaborators.map((collaborator) => {
+          return (
+            <li key={collaborator.uuid}>
+              <h4>{collaborator.collaborator}</h4>
+              <button onClick={() => updateCollaborator(collaborator)}>
+                Update
+              </button>
+              <button onClick={() => deleteCollaborator(collaborator)}>
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }
