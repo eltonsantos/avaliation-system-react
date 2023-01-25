@@ -15,5 +15,7 @@ export function PrivateRoutes() {
     });
   }, []);
 
+  console.log("AUTH: " + auth.currentUser);
+
   return auth ? <Outlet /> : <Navigate to="/" />;
 }
