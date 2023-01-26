@@ -14,6 +14,7 @@ export function Login() {
       .then((useCredential) => {
         const user = useCredential.user;
         navigate("/admin");
+        console.log("Sign in successfully");
         console.log(user);
       })
       .catch((error) => {

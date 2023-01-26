@@ -1,21 +1,27 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { auth } from "../services/firebaseConfig";
 
 export function PrivateRoutes() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log("Uid: ", uid);
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setCurrentUser(currentUser);
+        setIsLoading(false);
       } else {
-        console.log("User is logged out");
+        setCurrentUser(null);
+        setIsLoading(false);
       }
     });
   }, []);
 
-  console.log("AUTH: " + auth.currentUser);
+  if (isLoading) {
+    return "Loading......";
+  }
 
-  return auth ? <Outlet /> : <Navigate to="/" />;
+  return currentUser ? <Outlet /> : <Navigate to="/" />;
 }

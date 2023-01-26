@@ -19,7 +19,7 @@ export function Menu() {
   return (
     <ul>
       <li>
-        <Link to="/admin">Home</Link> |
+        <Link to="/admin">Home</Link> |<Link to="/dashboard">Dashboard</Link> |
         <Link to="/collaborator">Add Collaborator</Link> |
         <button onClick={handleLogout}>Logout</button>
       </li>
