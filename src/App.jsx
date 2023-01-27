@@ -16,10 +16,10 @@ export function App() {
           <Route element={<Admin />} path="/admin" />
           <Route element={<Dashboard />} path="/dashboard" />
           <Route element={<Collaborator />} path="/collaborator" />
+          <Route element={<Rating />} path="/rating" />
         </Route>
 
         <Route element={<Login />} path="/" />
-        <Route element={<Rating />} path="/rating" />
       </Routes>
     </Router>
   );
