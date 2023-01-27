@@ -38,27 +38,32 @@ export function Form() {
       <form id="form-rating" action="">
         <h3>Preencha seus dados</h3>
 
-        <div class="form-control">
-          <label for="name">Nome:</label>
+        <div className="form-control">
+          <label htmlFor="name">Nome:</label>
           <input type="text" placeholder="Nome" id="name" />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
+          <i className="fas fa-check-circle"></i>
+          <i className="fas fa-exclamation-circle"></i>
           <small>Error message</small>
         </div>
 
-        <div class="form-control">
-          <label for="service">Serviço:</label>
+        <div className="form-control">
+          <label htmlFor="service">Serviço:</label>
           <input type="text" placeholder="Serviço" id="service" />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
+          <i className="fas fa-check-circle"></i>
+          <i className="fas fa-exclamation-circle"></i>
           <small>Error message</small>
         </div>
 
-        <div class="form-control">
-          <label for="collaborator">Funcionário:</label>
-          <input type="text" placeholder="Funcionário" id="collaborator" />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
+        <div className="form-control">
+          <label htmlFor="collaborator">Funcionário:</label>
+          <select name="select">
+            <option value="valor1">Valor 1</option>
+            <option value="valor2">Valor 2</option>
+            <option value="valor3">Valor 3</option>
+          </select>
+          {/* <input type="text" placeholder="Funcionário" id="collaborator" /> */}
+          <i className="fas fa-check-circle"></i>
+          <i className="fas fa-exclamation-circle"></i>
           <small>Error message</small>
         </div>
 
