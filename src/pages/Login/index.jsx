@@ -5,7 +5,7 @@ import { auth } from "../../services/firebaseConfig";
 
 import imgLogo from "../../assets/small-blue.png";
 
-import "../../styles/global.css";
+import "./styles.css";
 
 export function Login() {
   const navigate = useNavigate();

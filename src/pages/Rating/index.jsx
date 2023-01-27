@@ -1,11 +1,11 @@
 import { Form } from "../../components/Form";
 
+import "./styles.css";
+
 export function Rating() {
   return (
-    <div>
+    <div className="container">
       <h1>Rating</h1>
-      <Form />
-      <Form />
       <Form />
     </div>
   );

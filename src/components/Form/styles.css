@@ -1,0 +1,38 @@
+.container {
+  display: "flex";
+  flexdirection: "column";
+  alignitems: "center";
+}
+
+.stars {
+  display: "flex";
+  flexdirection: "row";
+  margin: 30px;
+}
+
+.textarea {
+  border: 1px solid #a9a9a9;
+  borderradius: 5;
+  width: 300;
+  padding: 10;
+  margin: "20px 0";
+  minheight: 100;
+}
+
+.textarea:focus {
+  border: 1px solid #f90;
+}
+
+.button {
+  border: 1px solid #f90;
+  borderradius: 5;
+  width: 300;
+  padding: 10;
+  cursor: "pointer";
+  padding: 10px 100px 10px 100px;
+}
+
+.button:hover {
+  background-color: #ccc;
+  color: #fff;
+}

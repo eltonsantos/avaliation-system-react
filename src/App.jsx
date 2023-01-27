@@ -6,6 +6,8 @@ import { Login } from "./pages/Login";
 import { Rating } from "./pages/Rating";
 import { PrivateRoutes } from "./routes";
 
+import "./styles/global.css";
+
 export function App() {
   return (
     <Router>
