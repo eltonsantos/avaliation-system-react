@@ -1,22 +1,13 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
 import { db } from "../../services/firebaseConfig";
+import { Star } from "../Star";
 import "./styles.css";
 
-const colors = {
-  orange: "#ffba5a",
-  gray: "#a9a9a9",
-};
-
 export function Form() {
-  const stars = Array(5).fill(0);
-  const [currentValue, setCurrentValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
   const [collaborators, setCollaborators] = useState([]);
   const [comment, setComment] = useState("");
 
-  const options = ["One", "Two", "Three", "Four", "Five"];
   const onOptionChangeHandler = (event) => {
     console.log("User Selected Value - ", event.target.value);
   };
@@ -38,18 +29,6 @@ export function Form() {
 
     getCollaborators();
   }, []);
-
-  function handleClick(value) {
-    setCurrentValue(value);
-  }
-
-  function handleMouseOver(value) {
-    setHoverValue(value);
-  }
-
-  function handleMouseLeave() {
-    setHoverValue(undefined);
-  }
 
   function handleResult() {
     console.log(currentValue);
@@ -92,94 +71,22 @@ export function Form() {
 
         <div className="stars">
           <h2>A comunicação entre você e o funcionário foi rápida?</h2>
-          {stars.map((_, index) => {
-            return (
-              <FaStar
-                key={index}
-                size={24}
-                style={{ marginRight: 10, cursor: "pointer" }}
-                color={
-                  (hoverValue || currentValue) > index
-                    ? colors.orange
-                    : colors.gray
-                }
-                onClick={() => handleClick(index + 1)}
-                onMouseOver={() => handleMouseOver(index + 1)}
-                onMouseLeave={handleMouseLeave}
-                value={currentValue}
-                onChange={(e) => setcurrentValue(e.target.value)}
-              />
-            );
-          })}
+          <Star />
         </div>
 
         <div className="stars">
           <h2>Foi de fácil entendimento?</h2>
-          {stars.map((_, index) => {
-            return (
-              <FaStar
-                key={index}
-                size={24}
-                style={{ marginRight: 10, cursor: "pointer" }}
-                color={
-                  (hoverValue || currentValue) > index
-                    ? colors.orange
-                    : colors.gray
-                }
-                onClick={() => handleClick(index + 1)}
-                onMouseOver={() => handleMouseOver(index + 1)}
-                onMouseLeave={handleMouseLeave}
-                value={currentValue}
-                onChange={(e) => setcurrentValue(e.target.value)}
-              />
-            );
-          })}
+          <Star />
         </div>
 
         <div className="stars">
           <h2>Gostou do serviço prestado?</h2>
-          {stars.map((_, index) => {
-            return (
-              <FaStar
-                key={index}
-                size={24}
-                style={{ marginRight: 10, cursor: "pointer" }}
-                color={
-                  (hoverValue || currentValue) > index
-                    ? colors.orange
-                    : colors.gray
-                }
-                onClick={() => handleClick(index + 1)}
-                onMouseOver={() => handleMouseOver(index + 1)}
-                onMouseLeave={handleMouseLeave}
-                value={currentValue}
-                onChange={(e) => setcurrentValue(e.target.value)}
-              />
-            );
-          })}
+          <Star />
         </div>
 
         <div className="stars">
           <h2>Recomendaria o serviço para alguém?</h2>
-          {stars.map((_, index) => {
-            return (
-              <FaStar
-                key={index}
-                size={24}
-                style={{ marginRight: 10, cursor: "pointer" }}
-                color={
-                  (hoverValue || currentValue) > index
-                    ? colors.orange
-                    : colors.gray
-                }
-                onClick={() => handleClick(index + 1)}
-                onMouseOver={() => handleMouseOver(index + 1)}
-                onMouseLeave={handleMouseLeave}
-                value={currentValue}
-                onChange={(e) => setcurrentValue(e.target.value)}
-              />
-            );
-          })}
+          <Star />
         </div>
 
         <div className="stars">
@@ -192,7 +99,7 @@ export function Form() {
             rows="10"
             className="textarea"
             value={comment}
-            onChange={(e) => setTextareaValue(e.target.value)}
+            onChange={(e) => setComment(e.target.value)}
           ></textarea>
         </div>
 
