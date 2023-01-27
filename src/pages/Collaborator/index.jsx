@@ -57,7 +57,7 @@ export function Collaborator() {
   }
 
   return (
-    <>
+    <div className="container">
       <h1>Collaborator</h1>
       <Menu />
 
@@ -100,6 +100,6 @@ export function Collaborator() {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 }
