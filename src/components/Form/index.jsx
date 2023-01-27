@@ -71,22 +71,46 @@ export function Form() {
 
         <div className="stars">
           <h2>A comunicação entre você e o funcionário foi rápida?</h2>
-          <Star />
+          <Star
+            onRatingChanged={(newRating) => {
+              console.log(
+                `NEW RATING (${newRating}) DETECTED FOR 1.. SAVING TO DB`
+              );
+            }}
+          />
         </div>
 
         <div className="stars">
           <h2>Foi de fácil entendimento?</h2>
-          <Star />
+          <Star
+            onRatingChanged={(newRating) => {
+              console.log(
+                `NEW RATING (${newRating}) DETECTED FOR 2.. SAVING TO DB`
+              );
+            }}
+          />
         </div>
 
         <div className="stars">
           <h2>Gostou do serviço prestado?</h2>
-          <Star />
+          <Star
+            onRatingChanged={(newRating) => {
+              console.log(
+                `NEW RATING (${newRating}) DETECTED FOR 3.. SAVING TO DB`
+              );
+            }}
+          />
         </div>
 
         <div className="stars">
           <h2>Recomendaria o serviço para alguém?</h2>
-          <Star />
+          <Star
+            onRatingChanged={(newRating) => {
+              console.log(
+                `NEW RATING (${newRating}) DETECTED FOR 4.. SAVING TO DB`
+              );
+            }}
+          />
         </div>
 
         <div className="stars">

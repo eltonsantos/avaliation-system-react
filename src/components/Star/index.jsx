@@ -6,13 +6,14 @@ const colors = {
   gray: "#a9a9a9",
 };
 
-export function Star() {
+export function Star({ onRatingChanged }) {
   const stars = Array(5).fill(0);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
 
   function handleClick(value) {
     setCurrentValue(value);
+    onRatingChanged(value);
   }
 
   function handleMouseOver(value) {
@@ -37,8 +38,8 @@ export function Star() {
             onClick={() => handleClick(index + 1)}
             onMouseOver={() => handleMouseOver(index + 1)}
             onMouseLeave={handleMouseLeave}
-            value={currentValue}
-            onChange={(e) => setcurrentValue(e.target.value)}
+            // value={currentValue}
+            // onChange={(e) => setcurrentValue(e.target.value)}
           />
         );
       })}
