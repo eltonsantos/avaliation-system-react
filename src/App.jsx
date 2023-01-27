@@ -3,6 +3,7 @@ import { Admin } from "./pages/Admin";
 import { Collaborator } from "./pages/Collaborator";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
+import { Rating } from "./pages/Rating";
 import { PrivateRoutes } from "./routes";
 
 export function App() {
@@ -16,6 +17,7 @@ export function App() {
         </Route>
 
         <Route element={<Login />} path="/" />
+        <Route element={<Rating />} path="/rating" />
       </Routes>
     </Router>
   );
