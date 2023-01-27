@@ -1,5 +1,7 @@
+import { collection } from "firebase/firestore";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { db } from "../../services/firebaseConfig";
 import "./styles.css";
 
 const colors = {
@@ -11,21 +13,20 @@ export function Form() {
   const stars = Array(5).fill(0);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
-  const [textareaValue, setTextareaValue] = useState("");
+  const [comment, setComment] = useState("");
+
+  const answersCollectionRef = collection(db, "answers");
 
   function handleClick(value) {
     setCurrentValue(value);
-    console.log(setCurrentValue(value));
   }
 
   function handleMouseOver(value) {
     setHoverValue(value);
-    console.log(setHoverValue(value));
   }
 
   function handleMouseLeave() {
     setHoverValue(undefined);
-    console.log(setHoverValue(undefined));
   }
 
   function handleResult() {
@@ -35,7 +36,7 @@ export function Form() {
 
   return (
     <div className="container">
-      <form id="form-rating" action="">
+      <form id="form-rating" onSubmit={handleResult}>
         <h3>Preencha seus dados</h3>
 
         <div className="form-control">
@@ -61,10 +62,78 @@ export function Form() {
             <option value="valor2">Valor 2</option>
             <option value="valor3">Valor 3</option>
           </select>
-          {/* <input type="text" placeholder="Funcionário" id="collaborator" /> */}
           <i className="fas fa-check-circle"></i>
           <i className="fas fa-exclamation-circle"></i>
           <small>Error message</small>
+        </div>
+
+        <div className="stars">
+          <h2>A comunicação entre você e o funcionário foi rápida?</h2>
+          {stars.map((_, index) => {
+            return (
+              <FaStar
+                key={index}
+                size={24}
+                style={{ marginRight: 10, cursor: "pointer" }}
+                color={
+                  (hoverValue || currentValue) > index
+                    ? colors.orange
+                    : colors.gray
+                }
+                onClick={() => handleClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+                value={currentValue}
+                onChange={(e) => setcurrentValue(e.target.value)}
+              />
+            );
+          })}
+        </div>
+
+        <div className="stars">
+          <h2>Foi de fácil entendimento?</h2>
+          {stars.map((_, index) => {
+            return (
+              <FaStar
+                key={index}
+                size={24}
+                style={{ marginRight: 10, cursor: "pointer" }}
+                color={
+                  (hoverValue || currentValue) > index
+                    ? colors.orange
+                    : colors.gray
+                }
+                onClick={() => handleClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+                value={currentValue}
+                onChange={(e) => setcurrentValue(e.target.value)}
+              />
+            );
+          })}
+        </div>
+
+        <div className="stars">
+          <h2>Gostou do serviço prestado?</h2>
+          {stars.map((_, index) => {
+            return (
+              <FaStar
+                key={index}
+                size={24}
+                style={{ marginRight: 10, cursor: "pointer" }}
+                color={
+                  (hoverValue || currentValue) > index
+                    ? colors.orange
+                    : colors.gray
+                }
+                onClick={() => handleClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+                value={currentValue}
+                onChange={(e) => setcurrentValue(e.target.value)}
+              />
+            );
+          })}
         </div>
 
         <div className="stars">
@@ -89,6 +158,7 @@ export function Form() {
             );
           })}
         </div>
+
         <div className="stars">
           <h2>Comentário, sugestão ou crítica:</h2>
 
@@ -98,13 +168,11 @@ export function Form() {
             cols="30"
             rows="10"
             className="textarea"
-            value={textareaValue}
+            value={comment}
             onChange={(e) => setTextareaValue(e.target.value)}
           ></textarea>
         </div>
-        <button className="button" onClick={handleResult}>
-          Submit
-        </button>
+        <button className="submit">Submit</button>
       </form>
     </div>
   );
