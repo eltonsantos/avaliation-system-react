@@ -1,0 +1,33 @@
+.inputCollaborator {
+  margin: 20px 0;
+}
+
+.inputCollaborator input {
+  padding: 10px;
+  width: 300px;
+}
+
+.inputCollaborator button {
+  border: 1px solid #f06;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.list-collaborators h3 {
+  margin: 20px 0px;
+}
+
+.list-collaborators li {
+  margin: 20px 0px;
+}
+
+.buttonCollaborator {
+  border: 1px solid #f90;
+  margin: 10px;
+  padding: 10px;
+}
+
+.buttonCollaborator:hover {
+  background-color: #f90;
+  color: #fff;
+}

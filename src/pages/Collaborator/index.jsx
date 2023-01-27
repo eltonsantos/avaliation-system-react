@@ -4,6 +4,8 @@ import { uid } from "uid";
 import { Menu } from "../../components/Menu";
 import { db } from "../../services/firebaseConfig";
 
+import "./styles.css";
+
 export function Collaborator() {
   const [collaborator, setCollaborator] = useState("");
   const [collaborators, setCollaborators] = useState([]);
@@ -61,45 +63,55 @@ export function Collaborator() {
       <h1>Collaborator</h1>
       <Menu />
 
-      <h4>Add collaborator</h4>
-      <input
-        type="text"
-        value={collaborator}
-        onChange={handleCollaboratorChange}
-        placeholder="Add Collaborator"
-      />
-      {isEdit ? (
-        <>
-          <button onClick={handleUpdateChange}>Update Collaborator</button>
-          <button
-            onClick={() => {
-              setIsEdit(false);
-              setCollaborator("");
-            }}
-          >
-            X
-          </button>
-        </>
-      ) : (
-        <button onClick={addCollaborator}>Add Collaborator</button>
-      )}
+      <div className="inputCollaborator">
+        <h4>Add collaborator</h4>
+        <input
+          type="text"
+          value={collaborator}
+          onChange={handleCollaboratorChange}
+          placeholder="Add Collaborator"
+        />
+        {isEdit ? (
+          <>
+            <button onClick={handleUpdateChange}>Update Collaborator</button>
+            <button
+              onClick={() => {
+                setIsEdit(false);
+                setCollaborator("");
+              }}
+            >
+              X
+            </button>
+          </>
+        ) : (
+          <button onClick={addCollaborator}>Add Collaborator</button>
+        )}
+      </div>
 
-      <h3>List collaborators</h3>
-      <ul>
-        {collaborators.map((collaborator) => {
-          return (
-            <li key={collaborator.uuid}>
-              <h4>{collaborator.collaborator}</h4>
-              <button onClick={() => updateCollaborator(collaborator)}>
-                Update
-              </button>
-              <button onClick={() => deleteCollaborator(collaborator)}>
-                Delete
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="list-collaborators">
+        <h3>List collaborators</h3>
+        <ul>
+          {collaborators.map((collaborator) => {
+            return (
+              <li key={collaborator.uuid}>
+                <h4>{collaborator.collaborator}</h4>
+                <button
+                  className="buttonCollaborator"
+                  onClick={() => updateCollaborator(collaborator)}
+                >
+                  Update
+                </button>
+                <button
+                  className="buttonCollaborator"
+                  onClick={() => deleteCollaborator(collaborator)}
+                >
+                  Delete
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
