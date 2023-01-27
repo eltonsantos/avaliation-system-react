@@ -1,22 +1,22 @@
 .container {
   display: "flex";
-  flexdirection: "column";
-  alignitems: "center";
+  flex-direction: "column";
+  align-items: "center";
 }
 
 .stars {
   display: "flex";
-  flexdirection: "row";
+  flex-direction: "row";
   margin: 30px;
 }
 
 .textarea {
   border: 1px solid #a9a9a9;
-  borderradius: 5;
+  border-radius: 5;
   width: 300;
   padding: 10;
   margin: "20px 0";
-  minheight: 100;
+  min-height: 100;
 }
 
 .textarea:focus {
@@ -25,7 +25,7 @@
 
 .button {
   border: 1px solid #f90;
-  borderradius: 5;
+  border-radius: 5;
   width: 300;
   padding: 10;
   cursor: "pointer";
