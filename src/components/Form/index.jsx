@@ -35,122 +35,72 @@ export function Form() {
 
   return (
     <div className="container">
-      <form action="">
+      <form id="form-rating" action="">
         <h3>Preencha seus dados</h3>
-        Nome: <input type="text" />
-        Funcionário: <input type="text" />
-        Serviço prestado: <input type="text" />
+
+        <div class="form-control">
+          <label for="name">Nome:</label>
+          <input type="text" placeholder="Nome" id="name" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="service">Serviço:</label>
+          <input type="text" placeholder="Serviço" id="service" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="collaborator">Funcionário:</label>
+          <input type="text" placeholder="Funcionário" id="collaborator" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+
+        <div className="stars">
+          <h2>Recomendaria o serviço para alguém?</h2>
+          {stars.map((_, index) => {
+            return (
+              <FaStar
+                key={index}
+                size={24}
+                style={{ marginRight: 10, cursor: "pointer" }}
+                color={
+                  (hoverValue || currentValue) > index
+                    ? colors.orange
+                    : colors.gray
+                }
+                onClick={() => handleClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+                value={currentValue}
+                onChange={(e) => setcurrentValue(e.target.value)}
+              />
+            );
+          })}
+        </div>
+        <div className="stars">
+          <h2>Comentário, sugestão ou crítica:</h2>
+
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            className="textarea"
+            value={textareaValue}
+            onChange={(e) => setTextareaValue(e.target.value)}
+          ></textarea>
+        </div>
+        <button className="button" onClick={handleResult}>
+          Submit
+        </button>
       </form>
-
-      <div className="stars">
-        <h2>A comunicação entre você e o funcionário foi rápida?</h2>
-        {stars.map((_, index) => {
-          return (
-            <FaStar
-              key={index}
-              size={24}
-              style={{ marginRight: 10, cursor: "pointer" }}
-              color={
-                (hoverValue || currentValue) > index
-                  ? colors.orange
-                  : colors.gray
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-              value={currentValue}
-              onChange={(e) => setcurrentValue(e.target.value)}
-            />
-          );
-        })}
-      </div>
-
-      <div className="stars">
-        <h2>Foi de fácil entendimento?</h2>
-        {stars.map((_, index) => {
-          return (
-            <FaStar
-              key={index}
-              size={24}
-              style={{ marginRight: 10, cursor: "pointer" }}
-              color={
-                (hoverValue || currentValue) > index
-                  ? colors.orange
-                  : colors.gray
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-              value={currentValue}
-              onChange={(e) => setcurrentValue(e.target.value)}
-            />
-          );
-        })}
-      </div>
-
-      <div className="stars">
-        <h2>Gostou do serviço prestado?</h2>
-        {stars.map((_, index) => {
-          return (
-            <FaStar
-              key={index}
-              size={24}
-              style={{ marginRight: 10, cursor: "pointer" }}
-              color={
-                (hoverValue || currentValue) > index
-                  ? colors.orange
-                  : colors.gray
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-              value={currentValue}
-              onChange={(e) => setcurrentValue(e.target.value)}
-            />
-          );
-        })}
-      </div>
-
-      <div className="stars">
-        <h2>Recomendaria o serviço para alguém?</h2>
-        {stars.map((_, index) => {
-          return (
-            <FaStar
-              key={index}
-              size={24}
-              style={{ marginRight: 10, cursor: "pointer" }}
-              color={
-                (hoverValue || currentValue) > index
-                  ? colors.orange
-                  : colors.gray
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-              value={currentValue}
-              onChange={(e) => setcurrentValue(e.target.value)}
-            />
-          );
-        })}
-      </div>
-
-      <div className="stars">
-        <h2>Comentário, sugestão ou crítica:</h2>
-
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          className="textarea"
-          value={textareaValue}
-          onChange={(e) => setTextareaValue(e.target.value)}
-        ></textarea>
-      </div>
-
-      <button className="button" onClick={handleResult}>
-        Submit
-      </button>
     </div>
   );
 }
