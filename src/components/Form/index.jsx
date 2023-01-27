@@ -1,5 +1,5 @@
-import { collection } from "firebase/firestore";
-import { useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { db } from "../../services/firebaseConfig";
 import "./styles.css";
@@ -13,9 +13,31 @@ export function Form() {
   const stars = Array(5).fill(0);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [collaborators, setCollaborators] = useState([]);
   const [comment, setComment] = useState("");
 
+  const options = ["One", "Two", "Three", "Four", "Five"];
+  const onOptionChangeHandler = (event) => {
+    console.log("User Selected Value - ", event.target.value);
+  };
+
   const answersCollectionRef = collection(db, "answers");
+
+  const collaboratorsCollectionRef = collection(db, "collaborators");
+
+  useEffect(() => {
+    const getCollaborators = async () => {
+      const data = await getDocs(collaboratorsCollectionRef);
+      setCollaborators(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+
+    getCollaborators();
+  }, []);
 
   function handleClick(value) {
     setCurrentValue(value);
@@ -57,10 +79,11 @@ export function Form() {
 
         <div className="form-control">
           <label htmlFor="collaborator">Funcionário:</label>
-          <select name="select">
-            <option value="valor1">Valor 1</option>
-            <option value="valor2">Valor 2</option>
-            <option value="valor3">Valor 3</option>
+          <select onChange={onOptionChangeHandler}>
+            <option>Selecione o funcionário que te atendeu</option>
+            {collaborators.map((collaborator, index) => {
+              return <option key={index}>{collaborator.name}</option>;
+            })}
           </select>
           <i className="fas fa-check-circle"></i>
           <i className="fas fa-exclamation-circle"></i>
@@ -172,6 +195,7 @@ export function Form() {
             onChange={(e) => setTextareaValue(e.target.value)}
           ></textarea>
         </div>
+
         <button className="submit">Submit</button>
       </form>
     </div>
