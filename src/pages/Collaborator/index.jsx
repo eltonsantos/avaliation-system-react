@@ -1,61 +1,62 @@
-import { onValue, ref, remove, set, update } from "firebase/database";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { uid } from "uid";
 import { Menu } from "../../components/Menu";
 import { db } from "../../services/firebaseConfig";
 
 import "./styles.css";
 
 export function Collaborator() {
-  const [collaborator, setCollaborator] = useState("");
+  const [name, setName] = useState("");
   const [collaborators, setCollaborators] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempId, setTempId] = useState("");
 
-  function handleCollaboratorChange(e) {
-    setCollaborator(e.target.value);
-  }
+  const collaboratorsCollectionRef = collection(db, "collaborators");
 
   useEffect(() => {
-    onValue(ref(db), (snapshot) => {
-      setCollaborators([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((collaborator) => {
-          setCollaborators((oldArray) => [...oldArray, collaborator]);
-        });
-      }
-    });
+    const getCollaborators = async () => {
+      const data = await getDocs(collaboratorsCollectionRef);
+      setCollaborators(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+
+    getCollaborators();
   }, []);
 
-  function addCollaborator() {
-    const uuid = uid();
-    set(ref(db, `/${uuid}`), {
-      collaborator,
-      uuid,
+  async function createCollaborators() {
+    await addDoc(collaboratorsCollectionRef, {
+      name,
     });
-
-    setCollaborator("");
   }
 
-  function updateCollaborator(collaborator) {
+  async function deleteCollaborator(id) {
+    const collaborator = doc(db, "collaborators", id);
+    await deleteDoc(collaborator);
+  }
+
+  async function updateCollaborator(collaborator) {
     setIsEdit(true);
-    setTempId(collaborator.uuid);
-    setCollaborator(collaborator.collaborator);
+    setTempId(collaborator.id);
+    setName(collaborator.name);
   }
 
-  function handleUpdateChange() {
-    update(ref(db, `/${tempId}`), {
-      collaborator,
-      uuid: tempId,
+  async function handleSubmitChangeCollaborator() {
+    const collaborator = doc(db, "collaborators", tempId);
+    await updateDoc(collaborator, {
+      name,
     });
-
-    setCollaborator("");
-    setIsEdit(false);
-  }
-
-  function deleteCollaborator(collaborator) {
-    remove(ref(db, `/${collaborator.uuid}`));
+    setName("");
   }
 
   return (
@@ -67,24 +68,26 @@ export function Collaborator() {
         <h4>Add collaborator</h4>
         <input
           type="text"
-          value={collaborator}
-          onChange={handleCollaboratorChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Add Collaborator"
         />
         {isEdit ? (
           <>
-            <button onClick={handleUpdateChange}>Update Collaborator</button>
+            <button onClick={handleSubmitChangeCollaborator}>
+              Update Collaborator
+            </button>
             <button
               onClick={() => {
                 setIsEdit(false);
-                setCollaborator("");
+                setName("");
               }}
             >
               X
             </button>
           </>
         ) : (
-          <button onClick={addCollaborator}>Add Collaborator</button>
+          <button onClick={createCollaborators}>Add Collaborator</button>
         )}
       </div>
 
@@ -93,8 +96,8 @@ export function Collaborator() {
         <ul>
           {collaborators.map((collaborator) => {
             return (
-              <li key={collaborator.uuid}>
-                <h4>{collaborator.collaborator}</h4>
+              <li key={collaborator.id}>
+                <h4>{collaborator.name}</h4>
                 <button
                   className="buttonCollaborator"
                   onClick={() => updateCollaborator(collaborator)}
@@ -103,7 +106,7 @@ export function Collaborator() {
                 </button>
                 <button
                   className="buttonCollaborator"
-                  onClick={() => deleteCollaborator(collaborator)}
+                  onClick={() => deleteCollaborator(collaborator.id)}
                 >
                   Delete
                 </button>
