@@ -8,7 +8,7 @@ export function Menu() {
   function handleLogout() {
     signOut(auth)
       .then(() => {
-        navigate("/");
+        navigate("/login");
         console.log("Signed out successfully");
       })
       .catch((error) => {
@@ -20,7 +20,6 @@ export function Menu() {
     <ul>
       <li>
         <Link to="/admin">Home</Link> |<Link to="/dashboard">Gráficos</Link> |
-        <Link to="/">Avaliação</Link> |
         <Link to="/collaborator">Adicionar funcionários</Link> |
         <button onClick={handleLogout}>Logout</button>
       </li>

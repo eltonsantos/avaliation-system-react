@@ -60,7 +60,7 @@ export function Collaborator() {
   }
 
   return (
-    <div className="container">
+    <div className="containerCollaborator">
       <h1>Collaborator</h1>
       <Menu />
 

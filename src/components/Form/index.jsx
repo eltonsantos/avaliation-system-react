@@ -92,7 +92,7 @@ export function Form() {
   }
 
   return (
-    <div className="container">
+    <>
       <form id="form-rating" onSubmit={handleSubmitResult}>
         <h3>Preencha seus dados</h3>
 
@@ -203,6 +203,6 @@ export function Form() {
 
         <button className="submit">Submit</button>
       </form>
-    </div>
+    </>
   );
 }
