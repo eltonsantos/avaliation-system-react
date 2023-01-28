@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
@@ -8,15 +8,16 @@ export function Form() {
   const [collaborators, setCollaborators] = useState([]);
   const [name, setName] = useState("");
   const [service, setService] = useState("");
-  const [answer1, setAnswer1] = useState("");
-  const [answer2, setAnswer2] = useState("");
-  const [answer3, setAnswer3] = useState("");
-  const [answer4, setAnswer4] = useState("");
+  const [collaborator, setCollaborator] = useState(null);
+  const [answer1, setAnswer1] = useState(null);
+  const [answer2, setAnswer2] = useState(null);
+  const [answer3, setAnswer3] = useState(null);
+  const [answer4, setAnswer4] = useState(null);
   const [comment, setComment] = useState("");
 
-  const onOptionChangeHandler = (event) => {
-    console.log("Collaborator Selected Value - ", event.target.value);
-  };
+  // const onOptionChangeHandler = (event) => {
+  //   console.log("Collaborator Selected Value - ", event.target.value);
+  // };
 
   const answersCollectionRef = collection(db, "answers");
 
@@ -36,23 +37,39 @@ export function Form() {
     getCollaborators();
   }, []);
 
-  async function handleResult() {
+  async function handleSubmitResult(e) {
+    console.log("ENTRA");
+    e.preventDefault();
     await addDoc(answersCollectionRef, {
       name,
       service,
+      collaborator,
       answer1,
       answer2,
       answer3,
       answer4,
       comment,
-    });
-    console.log(currentValue);
-    console.log(textareaValue);
+    })
+      .then(() => {
+        console.log("SALVO!");
+
+        setName("");
+        setService("");
+        setCollaborator(null);
+        setAnswer1(null);
+        setAnswer2(null);
+        setAnswer3(null);
+        setAnswer4(null);
+        setComment("");
+      })
+      .catch((err) => {
+        console.log("ERRO: " + err);
+      });
   }
 
   return (
     <div className="container">
-      <form id="form-rating" onSubmit={handleResult}>
+      <form id="form-rating" onSubmit={handleSubmitResult}>
         <h3>Preencha seus dados</h3>
 
         <div className="form-control">
@@ -85,7 +102,7 @@ export function Form() {
 
         <div className="form-control">
           <label htmlFor="collaborator">Funcionário:</label>
-          <select onChange={onOptionChangeHandler}>
+          <select onChange={(e) => setCollaborator(e.target.value)}>
             <option>Selecione o funcionário que te atendeu</option>
             {collaborators.map((collaborator, index) => {
               return <option key={index}>{collaborator.name}</option>;
