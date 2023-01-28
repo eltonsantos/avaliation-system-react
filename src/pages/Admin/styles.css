@@ -6,3 +6,15 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.btnToken {
+  margin: 20px;
+  background-color: #21d4fd;
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.btnToken:hover {
+  background-color: #6a7dfe;
+}

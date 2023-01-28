@@ -1,9 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../services/firebaseConfig";
-
+import { toast } from "react-toastify";
 import imgLogo from "../../assets/small-blue.png";
+import { auth } from "../../services/firebaseConfig";
 
 import "./styles.css";
 
@@ -17,11 +17,14 @@ export function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((useCredential) => {
         const user = useCredential.user;
-        navigate("/admin");
+        navigate("/dashboard");
         console.log("Sign in successfully");
         console.log(user);
       })
       .catch((error) => {
+        toast.error("Email ou senha não conferem", {
+          theme: "colored",
+        });
         console.log(error.message);
       });
   }
