@@ -70,6 +70,9 @@ export function Form() {
         });
         console.log("SALVO NO FIREBASE! 🔥");
 
+        // A temporary fix to clear fields of the form
+        document.getElementById("form-rating").reset();
+
         setName("");
         setService("");
         setCollaborator("");
@@ -79,7 +82,7 @@ export function Form() {
         setAnswer4(0);
         setComment("");
 
-        navigate("/thanks");
+        // navigate("/thanks");
       })
       .catch((error) => {
         toast.error(error.message, {
