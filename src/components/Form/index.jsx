@@ -8,11 +8,11 @@ export function Form() {
   const [collaborators, setCollaborators] = useState([]);
   const [name, setName] = useState("");
   const [service, setService] = useState("");
-  const [collaborator, setCollaborator] = useState(null);
-  const [answer1, setAnswer1] = useState(null);
-  const [answer2, setAnswer2] = useState(null);
-  const [answer3, setAnswer3] = useState(null);
-  const [answer4, setAnswer4] = useState(null);
+  const [collaborator, setCollaborator] = useState("");
+  const [answer1, setAnswer1] = useState(0);
+  const [answer2, setAnswer2] = useState(0);
+  const [answer3, setAnswer3] = useState(0);
+  const [answer4, setAnswer4] = useState(0);
   const [comment, setComment] = useState("");
 
   // const onOptionChangeHandler = (event) => {
@@ -55,11 +55,11 @@ export function Form() {
 
         setName("");
         setService("");
-        setCollaborator(null);
-        setAnswer1(null);
-        setAnswer2(null);
-        setAnswer3(null);
-        setAnswer4(null);
+        setCollaborator("");
+        setAnswer1(0);
+        setAnswer2(0);
+        setAnswer3(0);
+        setAnswer4(0);
         setComment("");
       })
       .catch((err) => {
@@ -103,10 +103,12 @@ export function Form() {
         <div className="form-control">
           <label htmlFor="collaborator">Funcionário:</label>
           <select onChange={(e) => setCollaborator(e.target.value)}>
-            <option>Selecione o funcionário que te atendeu</option>
-            {collaborators.map((collaborator, index) => {
-              return <option key={index}>{collaborator.name}</option>;
-            })}
+            <option value="">Selecione o funcionário que te atendeu</option>
+            {collaborators.map((collaborator, index) => (
+              <option value={collaborator.name} key={index}>
+                {collaborator.name}
+              </option>
+            ))}
           </select>
           <i className="fas fa-check-circle"></i>
           <i className="fas fa-exclamation-circle"></i>
@@ -116,7 +118,8 @@ export function Form() {
         <div className="stars">
           <h2>A comunicação entre você e o funcionário foi rápida?</h2>
           <Star
-            answer1={answer1}
+            value={answer1}
+            onChange={(e) => setAnswer1(e.target.value)}
             onRatingChanged={(newRating) => {
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 1.. SAVING TO DB`
@@ -128,7 +131,8 @@ export function Form() {
         <div className="stars">
           <h2>Foi de fácil entendimento?</h2>
           <Star
-            answer2={answer2}
+            value={answer2}
+            onChange={(e) => setAnswer2(e.target.value)}
             onRatingChanged={(newRating) => {
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 2.. SAVING TO DB`
@@ -140,7 +144,8 @@ export function Form() {
         <div className="stars">
           <h2>Gostou do serviço prestado?</h2>
           <Star
-            answer3={answer3}
+            value={answer3}
+            onChange={(e) => setAnswer3(e.target.value)}
             onRatingChanged={(newRating) => {
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 3.. SAVING TO DB`
@@ -152,7 +157,8 @@ export function Form() {
         <div className="stars">
           <h2>Recomendaria o serviço para alguém?</h2>
           <Star
-            answer4={answer4}
+            value={answer4}
+            onChange={(e) => setAnswer4(e.target.value)}
             onRatingChanged={(newRating) => {
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 4.. SAVING TO DB`
