@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
-import "./styles.css";
 
 const createFormSchema = Yup.object({
   name: Yup.string().required("Nome não pode ficar em branco"),
@@ -202,7 +201,7 @@ export function Form() {
           ></textarea>
         </div>
 
-        <button className="submit">Submit</button>
+        <button className="submit">Enviar</button>
       </form>
     </>
   );
