@@ -82,7 +82,7 @@ export function Form() {
         setAnswer4(0);
         setComment("");
 
-        // navigate("/thanks");
+        navigate("/thanks");
       })
       .catch((error) => {
         toast.error(error.message, {
