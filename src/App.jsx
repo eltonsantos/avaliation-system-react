@@ -4,6 +4,7 @@ import { Collaborator } from "./pages/Collaborator";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
 import { Rating } from "./pages/Rating";
+import { Thanks } from "./pages/Thanks";
 import { PrivateRoutes } from "./routes";
 
 import "./styles/global.css";
@@ -18,8 +19,9 @@ export function App() {
           <Route element={<Collaborator />} path="/collaborator" />
         </Route>
 
-        <Route element={<Login />} path="/login" />
         <Route element={<Rating />} path="/" />
+        <Route element={<Login />} path="/login" />
+        <Route element={<Thanks />} path="/thanks" />
       </Routes>
     </Router>
   );

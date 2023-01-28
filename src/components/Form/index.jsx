@@ -1,10 +1,12 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
 import "./styles.css";
 
 export function Form() {
+  const navigate = useNavigate();
   const [collaborators, setCollaborators] = useState([]);
   const [name, setName] = useState("");
   const [service, setService] = useState("");
@@ -61,6 +63,8 @@ export function Form() {
         setAnswer3(0);
         setAnswer4(0);
         setComment("");
+
+        navigate("/thanks");
       })
       .catch((err) => {
         console.log("ERRO: " + err);
