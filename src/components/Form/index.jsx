@@ -1,9 +1,15 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
 import "./styles.css";
+
+const createFormSchema = Yup.object({
+  name: Yup.string().required("Nome não pode ficar em branco"),
+  service: Yup.string().required("Serviço não pode ficar em branco"),
+});
 
 export function Form() {
   const navigate = useNavigate();
@@ -42,17 +48,23 @@ export function Form() {
   async function handleSubmitResult(e) {
     console.log("ENTRA");
     e.preventDefault();
-    await addDoc(answersCollectionRef, {
-      name,
-      service,
-      collaborator,
-      answer1,
-      answer2,
-      answer3,
-      answer4,
-      comment,
-    })
+
+    await createFormSchema
+      .validate({
+        name,
+        service,
+      })
       .then(() => {
+        addDoc(answersCollectionRef, {
+          name,
+          service,
+          collaborator,
+          answer1,
+          answer2,
+          answer3,
+          answer4,
+          comment,
+        });
         console.log("SALVO!");
 
         setName("");
