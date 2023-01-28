@@ -144,6 +144,7 @@ export function Form() {
           <Star
             value={answer1}
             onRatingChanged={(newRating) => {
+              setAnswer1(newRating);
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 1.. SAVING TO DB`
               );
@@ -155,8 +156,8 @@ export function Form() {
           <h2>Foi de fácil entendimento?</h2>
           <Star
             value={answer2}
-            onChange={(e) => setAnswer2(e.target.value)}
             onRatingChanged={(newRating) => {
+              setAnswer2(newRating);
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 2.. SAVING TO DB`
               );
@@ -168,8 +169,8 @@ export function Form() {
           <h2>Gostou do serviço prestado?</h2>
           <Star
             value={answer3}
-            onChange={(e) => setAnswer3(e.target.value)}
             onRatingChanged={(newRating) => {
+              setAnswer3(newRating);
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 3.. SAVING TO DB`
               );
@@ -181,8 +182,8 @@ export function Form() {
           <h2>Recomendaria o serviço para alguém?</h2>
           <Star
             value={answer4}
-            onChange={(e) => setAnswer4(e.target.value)}
             onRatingChanged={(newRating) => {
+              setAnswer4(newRating);
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 4.. SAVING TO DB`
               );
