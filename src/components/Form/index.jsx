@@ -119,7 +119,6 @@ export function Form() {
           <h2>A comunicação entre você e o funcionário foi rápida?</h2>
           <Star
             value={answer1}
-            onChange={(e) => setAnswer1(e.target.value)}
             onRatingChanged={(newRating) => {
               console.log(
                 `NEW RATING (${newRating}) DETECTED FOR 1.. SAVING TO DB`

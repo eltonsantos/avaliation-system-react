@@ -6,7 +6,7 @@ const colors = {
   gray: "#a9a9a9",
 };
 
-export function Star({ value, onChange, onRatingChanged }) {
+export function Star({ value, onRatingChanged }) {
   const stars = Array(5).fill(0);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
