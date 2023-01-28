@@ -1,6 +1,7 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
@@ -9,6 +10,7 @@ import "./styles.css";
 const createFormSchema = Yup.object({
   name: Yup.string().required("Nome não pode ficar em branco"),
   service: Yup.string().required("Serviço não pode ficar em branco"),
+  collaborator: Yup.string().required("Deve escolher um funcionário"),
 });
 
 export function Form() {
@@ -46,13 +48,13 @@ export function Form() {
   }, []);
 
   async function handleSubmitResult(e) {
-    console.log("ENTRA");
     e.preventDefault();
 
     await createFormSchema
       .validate({
         name,
         service,
+        collaborator,
       })
       .then(() => {
         addDoc(answersCollectionRef, {
@@ -64,8 +66,9 @@ export function Form() {
           answer3,
           answer4,
           comment,
+          createdAt: new Date().toString(),
         });
-        console.log("SALVO!");
+        console.log("SALVO NO FIREBASE! 🔥");
 
         setName("");
         setService("");
@@ -78,8 +81,10 @@ export function Form() {
 
         navigate("/thanks");
       })
-      .catch((err) => {
-        console.log("ERRO: " + err);
+      .catch((error) => {
+        toast.error(error.message, {
+          theme: "colored",
+        });
       });
   }
 
