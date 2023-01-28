@@ -8,7 +8,11 @@ export function LoginToken() {
   const [token, setToken] = useState();
 
   function handleToken() {
-    navigate("/");
+    let auth = { token: true };
+    if (auth.token) {
+      console.log(auth.token);
+      navigate("/");
+    }
   }
 
   return (

@@ -94,7 +94,7 @@ export function Form() {
   return (
     <>
       <form id="form-rating" onSubmit={handleSubmitResult}>
-        <h3>Preencha seus dados</h3>
+        <h3>Por favor preencha a avaliação</h3>
 
         <div className="form-control">
           <label htmlFor="name">Nome:</label>
