@@ -144,7 +144,7 @@ export function Form() {
           />
         </div>
 
-        <div className="stars">
+        <div className="comment">
           <h2>Comentário, sugestão ou crítica:</h2>
           <textarea
             cols="30"
