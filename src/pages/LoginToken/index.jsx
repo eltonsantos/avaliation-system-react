@@ -1,17 +1,35 @@
+import { collection, doc, getDocs } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import imgLogo from "../../assets/small-blue.png";
+import { db } from "../../services/firebaseConfig";
 import "./styles.css";
 
 export function LoginToken() {
   const navigate = useNavigate();
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
 
-  function handleToken() {
-    let auth = { token: true };
-    if (auth.token) {
-      console.log(auth.token);
+  const tokensCollectionRef = collection(db, "tokens");
+
+  async function handleToken(e) {
+    e.preventDefault();
+    const data = await getDocs(tokensCollectionRef);
+    const tokens = data.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+    const tokensId = tokens.map((token) => token.id);
+    if (tokensId.includes(token)) {
+      const tokenToChange = doc(db, "tokens", token);
+      console.log(tokenToChange);
+      // await updateDoc(tokenToChange, {
+      //   used: true,
+      // });
       navigate("/");
+    } else {
+      toast.error("Token não confere", {
+        theme: "colored",
+      });
     }
   }
 
@@ -41,6 +59,7 @@ export function LoginToken() {
                 className="input100"
                 type="password"
                 name="token"
+                value={token}
                 onChange={(e) => setToken(e.target.value)}
                 required
               />

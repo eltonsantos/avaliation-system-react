@@ -110,6 +110,11 @@
   width: 100%;
 }
 
+#form-rating button:hover {
+  background-color: #0fb5db;
+  border: 2px solid #0fb5db;
+}
+
 .stars {
   display: "flex";
   flex-direction: "row";
