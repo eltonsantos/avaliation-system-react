@@ -1,5 +1,6 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { uid } from "uid";
 import { Menu } from "../../components/Menu";
@@ -19,10 +20,6 @@ export function Admin() {
       setTokens(
         data.docs.map((doc) => ({
           ...doc.data(),
-          id: uid(),
-          expiredIn: null,
-          used: false,
-          ccreatedAt: new Date().toString(),
         }))
       );
     };
@@ -51,6 +48,17 @@ export function Admin() {
       });
   }
 
+  async function removeAllTokens() {
+    await db
+      .collection("tokens")
+      .get()
+      .then((res) => {
+        res.forEach((element) => {
+          element.ref.delete();
+        });
+      });
+  }
+
   return (
     <div className="containerAdmin">
       <h1>Admin</h1>
@@ -60,8 +68,12 @@ export function Admin() {
         Gerar Token
       </button>
 
+      <button className="btnTokenRemove" onClick={removeAllTokens}>
+        Remover todos os Tokens
+      </button>
+
       <h2>Tokens</h2>
-      <table>
+      <table id="tokens">
         <thead>
           <tr>
             <th>Código</th>
@@ -81,7 +93,13 @@ export function Admin() {
                   )}
                 </td>
                 <td>{token.expiredIn}</td>
-                <td>{token.used}</td>
+                <td>
+                  {token.used ? (
+                    <FaCheckCircle color="green" />
+                  ) : (
+                    <FaTimesCircle color="red" />
+                  )}
+                </td>
               </tr>
             );
           })}
