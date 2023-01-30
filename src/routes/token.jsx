@@ -24,5 +24,5 @@ export function TokenRoutes({ id }) {
     console.log("TOKEN: " + id);
   }, []);
 
-  return token == "undefined" ? <Outlet /> : <Navigate to="/token" />;
+  return token != "undefined" ? <Outlet /> : <Navigate to="/token" />;
 }
