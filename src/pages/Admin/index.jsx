@@ -31,7 +31,9 @@ export function Admin() {
     await addDoc(tokensCollectionRef, {
       id: uid(),
       createdAt: new Date().toString(),
-      expiredIn: null,
+      expiredIn: new Date(
+        new Date().setDate(new Date().getDate() + 7)
+      ).toString(),
       used: false,
     })
       .then(() => {
@@ -92,7 +94,13 @@ export function Admin() {
                     new Date(token.createdAt)
                   )}
                 </td>
-                <td>{token.expiredIn}</td>
+                <td>
+                  {token.expiredIn < token.createdAt
+                    ? ""
+                    : new Intl.DateTimeFormat("pt-BR").format(
+                        new Date(token.expiredIn)
+                      )}
+                </td>
                 <td>
                   {token.used ? (
                     <FaCheckCircle color="green" />
