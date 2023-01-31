@@ -23,5 +23,5 @@ export function PrivateRoutes() {
     return "Loading......";
   }
 
-  return currentUser ? <Outlet /> : <Navigate to="/login" />;
+  return currentUser ? <Outlet /> : <Navigate to="/" />;
 }

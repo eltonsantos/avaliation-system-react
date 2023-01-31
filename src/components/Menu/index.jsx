@@ -8,7 +8,7 @@ export function Menu() {
   function handleLogout() {
     signOut(auth)
       .then(() => {
-        navigate("/login");
+        navigate("/");
         console.log("Signed out successfully");
       })
       .catch((error) => {

@@ -102,29 +102,34 @@ export function Collaborator() {
             </tr>
           </thead>
           <tbody>
-            {collaborators.map((collaborator) => {
-              return (
-                <tr key={collaborator.id}>
-                  <td>{collaborator.name}</td>
-                  <td>
-                    <button
-                      className="buttonCollaborator"
-                      onClick={() => updateCollaborator(collaborator)}
-                    >
-                      Update
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="buttonCollaborator"
-                      onClick={() => deleteCollaborator(collaborator.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {collaborators
+              .sort(function (a, b) {
+                return new Date(a.name) - new Date(b.name);
+              })
+              .reverse()
+              .map((collaborator) => {
+                return (
+                  <tr key={collaborator.id}>
+                    <td>{collaborator.name}</td>
+                    <td>
+                      <button
+                        className="buttonCollaborator"
+                        onClick={() => updateCollaborator(collaborator)}
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="buttonCollaborator"
+                        onClick={() => deleteCollaborator(collaborator.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

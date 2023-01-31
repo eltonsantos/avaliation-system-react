@@ -100,29 +100,34 @@ export function Service() {
             </tr>
           </thead>
           <tbody>
-            {services.map((service) => {
-              return (
-                <tr key={service.id}>
-                  <td>{service.name}</td>
-                  <td>
-                    <button
-                      className="buttonService"
-                      onClick={() => updateService(service)}
-                    >
-                      Update
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="buttonService"
-                      onClick={() => deleteService(service.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {services
+              .sort(function (a, b) {
+                return new Date(a.name) - new Date(b.name);
+              })
+              .reverse()
+              .map((service) => {
+                return (
+                  <tr key={service.id}>
+                    <td>{service.name}</td>
+                    <td>
+                      <button
+                        className="buttonService"
+                        onClick={() => updateService(service)}
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="buttonService"
+                        onClick={() => deleteService(service.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

@@ -37,7 +37,7 @@ export function Admin() {
       used: false,
     })
       .then(() => {
-        toast.success("Token gerado com sucesso!", {
+        toast.success("Avaliação gerada com sucesso!", {
           theme: "colored",
         });
         console.log("Gerado no firebase 🔥");
@@ -67,15 +67,11 @@ export function Admin() {
       <Menu />
 
       <button className="btnToken" onClick={generateToken}>
-        Gerar Token
-      </button>
-
-      <button className="btnTokenRemove" onClick={removeAllTokens}>
-        Remover todos os Tokens
+        Gerar Avaliação
       </button>
 
       <div className="list-tokens">
-        <h3>Tokens</h3>
+        <h3>Avaliações</h3>
         <table id="table-tokens">
           <thead>
             <tr>
@@ -86,34 +82,39 @@ export function Admin() {
             </tr>
           </thead>
           <tbody>
-            {tokens.map((token) => {
-              return (
-                <tr key={token.id}>
-                  <td>
-                    {window.location.host}/token={token.id}
-                  </td>
-                  <td>
-                    {new Intl.DateTimeFormat("pt-BR").format(
-                      new Date(token.createdAt)
-                    )}
-                  </td>
-                  <td>
-                    {token.expiredIn < token.createdAt
-                      ? ""
-                      : new Intl.DateTimeFormat("pt-BR").format(
-                          new Date(token.expiredIn)
-                        )}
-                  </td>
-                  <td>
-                    {token.used ? (
-                      <FaCheckCircle color="green" />
-                    ) : (
-                      <FaTimesCircle color="red" />
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+            {tokens
+              .sort(function (a, b) {
+                return new Date(a.createdAt) - new Date(b.createdAt);
+              })
+              .reverse()
+              .map((token) => {
+                return (
+                  <tr key={token.id}>
+                    <td>
+                      {window.location.host}/avaliacao={token.id}
+                    </td>
+                    <td>
+                      {new Intl.DateTimeFormat("pt-BR").format(
+                        new Date(token.createdAt)
+                      )}
+                    </td>
+                    <td>
+                      {token.expiredIn < token.createdAt
+                        ? ""
+                        : new Intl.DateTimeFormat("pt-BR").format(
+                            new Date(token.expiredIn)
+                          )}
+                    </td>
+                    <td>
+                      {token.used ? (
+                        <FaCheckCircle color="green" />
+                      ) : (
+                        <FaTimesCircle color="red" />
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

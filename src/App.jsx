@@ -23,11 +23,11 @@ export function App() {
         </Route>
 
         <Route element={<TokenRoutes />}>
-          <Route element={<Rating />} path="/" />
+          <Route element={<Rating />} path="/avaliacao" />
           <Route element={<Thanks />} path="/thanks" />
         </Route>
 
-        <Route element={<Login />} path="/login" />
+        <Route element={<Login />} path="/" />
       </Routes>
     </Router>
   );
