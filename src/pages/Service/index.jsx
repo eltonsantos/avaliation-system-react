@@ -21,9 +21,9 @@ export function Service() {
   const servicesCollectionRef = collection(db, "services");
 
   useEffect(() => {
-    const getCollaborators = async () => {
-      const data = await getDocs(collaboratorsCollectionRef);
-      setCollaborators(
+    const getServices = async () => {
+      const data = await getDocs(servicesCollectionRef);
+      setServices(
         data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
@@ -31,27 +31,27 @@ export function Service() {
       );
     };
 
-    getCollaborators();
+    getServices();
   }, []);
 
-  async function createCollaborators() {
+  async function createServices() {
     await addDoc(servicesCollectionRef, {
       name,
     });
   }
 
-  async function deleteCollaborator(id) {
+  async function deleteService(id) {
     const service = doc(db, "services", id);
     await deleteDoc(service);
   }
 
-  async function updateCollaborator(service) {
+  async function updateService(service) {
     setIsEdit(true);
     setTempId(service.id);
     setName(service.name);
   }
 
-  async function handleSubmitChangeCollaborator() {
+  async function handleSubmitChangeService() {
     const service = doc(db, "services", tempId);
     await updateDoc(service, {
       name,
@@ -70,13 +70,11 @@ export function Service() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Add Collaborator"
+          placeholder="Add Service"
         />
         {isEdit ? (
           <>
-            <button onClick={handleSubmitChangeCollaborator}>
-              Update Service
-            </button>
+            <button onClick={handleSubmitChangeService}>Update Service</button>
             <button
               onClick={() => {
                 setIsEdit(false);
@@ -87,12 +85,12 @@ export function Service() {
             </button>
           </>
         ) : (
-          <button onClick={createCollaborators}>Add Collaborator</button>
+          <button onClick={createServices}>Add Service</button>
         )}
       </div>
 
-      <div className="list-collaborators">
-        <h3>List collaborators</h3>
+      <div className="list-services">
+        <h3>List services</h3>
         <table id="table-services">
           <thead>
             <tr>
@@ -108,16 +106,16 @@ export function Service() {
                   <td>{service.name}</td>
                   <td>
                     <button
-                      className="buttonCollaborator"
-                      onClick={() => updateCollaborator(service)}
+                      className="buttonService"
+                      onClick={() => updateService(service)}
                     >
                       Update
                     </button>
                   </td>
                   <td>
                     <button
-                      className="buttonCollaborator"
-                      onClick={() => deleteCollaborator(service.id)}
+                      className="buttonService"
+                      onClick={() => deleteService(service.id)}
                     >
                       Delete
                     </button>

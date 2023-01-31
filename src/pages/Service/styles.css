@@ -1,0 +1,71 @@
+.containerService {
+  display: "flex";
+  flex-direction: "column";
+  align-items: "center";
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.inputService {
+  margin: 20px 0;
+}
+
+.inputService input {
+  padding: 10px;
+  width: 300px;
+}
+
+.inputService button {
+  border: 1px solid #f06;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.inputService button:hover {
+  background-color: #f06;
+  color: #fff;
+}
+
+.list-services h3 {
+  margin: 20px 0px;
+}
+
+.buttonService {
+  border: 1px solid #f90;
+  margin: 10px;
+  padding: 10px;
+}
+
+.buttonService:hover {
+  background-color: #f90;
+  color: #fff;
+}
+
+#table-services {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table-services td,
+#table-services th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table-services tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#table-services tr:hover {
+  background-color: #ddd;
+}
+
+#table-services th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #6a7dfe;
+  color: white;
+}
