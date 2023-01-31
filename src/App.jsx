@@ -3,8 +3,8 @@ import { Admin } from "./pages/Admin";
 import { Collaborator } from "./pages/Collaborator";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
-import { LoginToken } from "./pages/LoginToken";
 import { Rating } from "./pages/Rating";
+import { Service } from "./pages/Service";
 import { Thanks } from "./pages/Thanks";
 import { PrivateRoutes } from "./routes";
 import { TokenRoutes } from "./routes/token";
@@ -18,7 +18,8 @@ export function App() {
         <Route element={<PrivateRoutes />}>
           <Route element={<Admin />} path="/admin" />
           <Route element={<Dashboard />} path="/dashboard" />
-          <Route element={<Collaborator />} path="/collaborator" />
+          <Route element={<Collaborator />} path="/collaborators" />
+          <Route element={<Service />} path="/services" />
         </Route>
 
         <Route element={<TokenRoutes />}>
@@ -26,7 +27,6 @@ export function App() {
           <Route element={<Thanks />} path="/thanks" />
         </Route>
 
-        <Route element={<LoginToken />} path="/token" />
         <Route element={<Login />} path="/login" />
       </Routes>
     </Router>

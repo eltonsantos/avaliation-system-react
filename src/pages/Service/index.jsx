@@ -12,13 +12,13 @@ import { db } from "../../services/firebaseConfig";
 
 import "./styles.css";
 
-export function Collaborator() {
+export function Service() {
   const [name, setName] = useState("");
-  const [collaborators, setCollaborators] = useState([]);
+  const [services, setServices] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempId, setTempId] = useState("");
 
-  const collaboratorsCollectionRef = collection(db, "collaborators");
+  const servicesCollectionRef = collection(db, "services");
 
   useEffect(() => {
     const getCollaborators = async () => {
@@ -35,37 +35,37 @@ export function Collaborator() {
   }, []);
 
   async function createCollaborators() {
-    await addDoc(collaboratorsCollectionRef, {
+    await addDoc(servicesCollectionRef, {
       name,
     });
   }
 
   async function deleteCollaborator(id) {
-    const collaborator = doc(db, "collaborators", id);
-    await deleteDoc(collaborator);
+    const service = doc(db, "services", id);
+    await deleteDoc(service);
   }
 
-  async function updateCollaborator(collaborator) {
+  async function updateCollaborator(service) {
     setIsEdit(true);
-    setTempId(collaborator.id);
-    setName(collaborator.name);
+    setTempId(service.id);
+    setName(service.name);
   }
 
   async function handleSubmitChangeCollaborator() {
-    const collaborator = doc(db, "collaborators", tempId);
-    await updateDoc(collaborator, {
+    const service = doc(db, "services", tempId);
+    await updateDoc(service, {
       name,
     });
     setName("");
   }
 
   return (
-    <div className="containerCollaborator">
-      <h1>Collaborator</h1>
+    <div className="containerService">
+      <h1>Serviços</h1>
       <Menu />
 
-      <div className="inputCollaborator">
-        <h4>Add collaborator</h4>
+      <div className="inputService">
+        <h4>Add service</h4>
         <input
           type="text"
           value={name}
@@ -75,7 +75,7 @@ export function Collaborator() {
         {isEdit ? (
           <>
             <button onClick={handleSubmitChangeCollaborator}>
-              Update Collaborator
+              Update Service
             </button>
             <button
               onClick={() => {
@@ -93,7 +93,7 @@ export function Collaborator() {
 
       <div className="list-collaborators">
         <h3>List collaborators</h3>
-        <table id="table-collaborators">
+        <table id="table-services">
           <thead>
             <tr>
               <th>Nome</th>
@@ -102,14 +102,14 @@ export function Collaborator() {
             </tr>
           </thead>
           <tbody>
-            {collaborators.map((collaborator) => {
+            {services.map((service) => {
               return (
-                <tr key={collaborator.id}>
-                  <td>{collaborator.name}</td>
+                <tr key={service.id}>
+                  <td>{service.name}</td>
                   <td>
                     <button
                       className="buttonCollaborator"
-                      onClick={() => updateCollaborator(collaborator)}
+                      onClick={() => updateCollaborator(service)}
                     >
                       Update
                     </button>
@@ -117,7 +117,7 @@ export function Collaborator() {
                   <td>
                     <button
                       className="buttonCollaborator"
-                      onClick={() => deleteCollaborator(collaborator.id)}
+                      onClick={() => deleteCollaborator(service.id)}
                     >
                       Delete
                     </button>

@@ -31,27 +31,31 @@
   background-color: red;
 }
 
-#tokens {
+.list-tokens h3 {
+  margin: 20px 0px;
+}
+
+#table-tokens {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#tokens td,
-#tokens th {
+#table-tokens td,
+#table-tokens th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#tokens tr:nth-child(even) {
+#table-tokens tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#tokens tr:hover {
+#table-tokens tr:hover {
   background-color: #ddd;
 }
 
-#tokens th {
+#table-tokens th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

@@ -74,45 +74,49 @@ export function Admin() {
         Remover todos os Tokens
       </button>
 
-      <h2>Tokens</h2>
-      <table id="tokens">
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Criado em</th>
-            <th>Expirado em</th>
-            <th>Usado?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tokens.map((token) => {
-            return (
-              <tr key={token.id}>
-                <td>{token.id}</td>
-                <td>
-                  {new Intl.DateTimeFormat("pt-BR").format(
-                    new Date(token.createdAt)
-                  )}
-                </td>
-                <td>
-                  {token.expiredIn < token.createdAt
-                    ? ""
-                    : new Intl.DateTimeFormat("pt-BR").format(
-                        new Date(token.expiredIn)
-                      )}
-                </td>
-                <td>
-                  {token.used ? (
-                    <FaCheckCircle color="green" />
-                  ) : (
-                    <FaTimesCircle color="red" />
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="list-tokens">
+        <h3>Tokens</h3>
+        <table id="table-tokens">
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th>Criado em</th>
+              <th>Expirado em</th>
+              <th>Usado?</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tokens.map((token) => {
+              return (
+                <tr key={token.id}>
+                  <td>
+                    {window.location.host}/token={token.id}
+                  </td>
+                  <td>
+                    {new Intl.DateTimeFormat("pt-BR").format(
+                      new Date(token.createdAt)
+                    )}
+                  </td>
+                  <td>
+                    {token.expiredIn < token.createdAt
+                      ? ""
+                      : new Intl.DateTimeFormat("pt-BR").format(
+                          new Date(token.expiredIn)
+                        )}
+                  </td>
+                  <td>
+                    {token.used ? (
+                      <FaCheckCircle color="green" />
+                    ) : (
+                      <FaTimesCircle color="red" />
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
