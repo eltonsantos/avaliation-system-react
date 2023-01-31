@@ -15,6 +15,7 @@ const createFormSchema = Yup.object({
 export function Form() {
   const navigate = useNavigate();
   const [collaborators, setCollaborators] = useState([]);
+  const [services, setServices] = useState([]);
   const [name, setName] = useState("");
   const [service, setService] = useState("");
   const [collaborator, setCollaborator] = useState("");
@@ -29,7 +30,7 @@ export function Form() {
   // };
 
   const answersCollectionRef = collection(db, "answers");
-
+  const servicesCollectionRef = collection(db, "services");
   const collaboratorsCollectionRef = collection(db, "collaborators");
 
   useEffect(() => {
@@ -44,6 +45,18 @@ export function Form() {
     };
 
     getCollaborators();
+
+    const getServices = async () => {
+      const data = await getDocs(servicesCollectionRef);
+      setServices(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+
+    getServices();
   }, []);
 
   async function handleSubmitResult(e) {
@@ -111,13 +124,14 @@ export function Form() {
 
         <div className="form-control">
           <label htmlFor="service">Serviço:</label>
-          <input
-            type="text"
-            placeholder="Serviço"
-            id="service"
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-          />
+          <select onChange={(e) => setService(e.target.value)}>
+            <option value="">Selecione o serviço contratado</option>
+            {services.map((service, index) => (
+              <option value={service.name} key={index}>
+                {service.name}
+              </option>
+            ))}
+          </select>
           <i className="fas fa-check-circle"></i>
           <i className="fas fa-exclamation-circle"></i>
           <small>Error message</small>
