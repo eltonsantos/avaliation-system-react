@@ -1,6 +1,6 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle, FaCopy, FaTimesCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { uid } from "uid";
 import { Menu } from "../../components/Menu";
@@ -50,15 +50,8 @@ export function Admin() {
       });
   }
 
-  async function removeAllTokens() {
-    await db
-      .collection("tokens")
-      .get()
-      .then((res) => {
-        res.forEach((element) => {
-          element.ref.delete();
-        });
-      });
+  function handleCopy() {
+    navigator.clipboard.writeText(JSON.stringify(props));
   }
 
   return (
@@ -75,6 +68,7 @@ export function Admin() {
         <table id="table-tokens">
           <thead>
             <tr>
+              <th></th>
               <th>URL</th>
               <th>Criado em</th>
               <th>Expirado em</th>
@@ -90,6 +84,13 @@ export function Admin() {
               .map((token) => {
                 return (
                   <tr key={token.id}>
+                    <td>
+                      <FaCopy
+                        color="gray"
+                        cursor="pointer"
+                        onClick={handleCopy}
+                      />
+                    </td>
                     <td>
                       {window.location.host}/avaliacao={token.id}
                     </td>
