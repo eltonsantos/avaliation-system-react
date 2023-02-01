@@ -50,8 +50,20 @@ export function Admin() {
       });
   }
 
-  function handleCopy() {
-    navigator.clipboard.writeText(JSON.stringify(props));
+  async function handleCopy(token) {
+    try {
+      await navigator.clipboard.writeText(
+        location.host + "/avaliacao=" + token.id
+      );
+      toast.success("Copiado!", {
+        theme: "colored",
+      });
+    } catch (error) {
+      toast.error("Ocorreu um erro ao copiar", {
+        theme: "colored",
+      });
+      console.log(error.message);
+    }
   }
 
   return (
@@ -68,7 +80,6 @@ export function Admin() {
         <table id="table-tokens">
           <thead>
             <tr>
-              <th></th>
               <th>URL</th>
               <th>Criado em</th>
               <th>Expirado em</th>
@@ -83,15 +94,14 @@ export function Admin() {
               .reverse()
               .map((token) => {
                 return (
-                  <tr key={token.id}>
+                  <tr rowSpan="2" key={token.id}>
                     <td>
                       <FaCopy
                         color="gray"
                         cursor="pointer"
-                        onClick={handleCopy}
+                        onClick={() => handleCopy(token)}
+                        id="iconCopy"
                       />
-                    </td>
-                    <td>
                       {window.location.host}/avaliacao={token.id}
                     </td>
                     <td>
