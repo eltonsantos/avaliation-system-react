@@ -1,10 +1,13 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useToken } from "../hooks/useToken";
 
 import { db } from "../services/firebaseConfig";
 
 export function TokenRoutes({ id }) {
+  let query = useToken();
+
   const [token, setToken] = useState("");
 
   const tokensCollectionRef = collection(db, "tokens");
@@ -24,5 +27,5 @@ export function TokenRoutes({ id }) {
     console.log("TOKEN: " + id);
   }, []);
 
-  return token != "undefined" ? <Outlet /> : <Navigate to="/token" />;
+  return token != "undefined" ? <Outlet /> : <Navigate to="/notfound" />;
 }
