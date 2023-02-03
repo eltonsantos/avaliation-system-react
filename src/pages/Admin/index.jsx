@@ -68,7 +68,8 @@ export function Admin() {
                       )}
                     </td>
                     <td>
-                      {token.expiredIn < token.createdAt
+                      {new Date(token.expiredIn).getTime() >
+                      new Date().getTime()
                         ? ""
                         : new Intl.DateTimeFormat("pt-BR").format(
                             new Date(token.expiredIn)
