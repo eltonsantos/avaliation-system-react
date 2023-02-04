@@ -22,7 +22,7 @@ export function App() {
           <Route element={<Service />} path="/services" />
         </Route>
 
-        <Route para element={<TokenRoutes />}>
+        <Route element={<TokenRoutes />}>
           <Route element={<Rating />} path="/avaliacao/:token" />
           <Route element={<Thanks />} path="/thanks" />
           <Route element={<NotFound />} path="*" />
