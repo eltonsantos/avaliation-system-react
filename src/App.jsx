@@ -7,7 +7,7 @@ import { NotFound } from "./pages/NotFound";
 import { Rating } from "./pages/Rating";
 import { Service } from "./pages/Service";
 import { Thanks } from "./pages/Thanks";
-import { PrivateRoutes } from "./routes";
+import { PrivateRoutes, TokenRoutes } from "./routes";
 
 import "./styles/global.css";
 
