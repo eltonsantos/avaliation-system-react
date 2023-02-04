@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useSearchParams } from "react-router-dom";
+import { Navigate, Route, useSearchParams } from "react-router-dom";
 import { useToken } from "../hooks/useToken";
 import { Rating } from "../pages/Rating";
 
@@ -29,9 +29,7 @@ export function TokenRoutes() {
   console.log(searchParams);
 
   return token != "undefined" ? (
-    <Routes>
-      <Route element={<Rating />} path="/" />
-    </Routes>
+    <Route element={<Rating />} path="/" />
   ) : (
     <Navigate to="/notfound" />
   );
