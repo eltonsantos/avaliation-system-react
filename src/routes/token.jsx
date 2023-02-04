@@ -5,7 +5,7 @@ import { Rating } from "../pages/Rating";
 export function TokenRoutes() {
   const { token } = useToken();
 
-  let { token } = useParams();
+  // let { token } = useParams();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
