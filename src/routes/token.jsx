@@ -1,10 +1,19 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import { useToken } from "../hooks/useToken";
+import { Rating } from "../pages/Rating";
 
 export function TokenRoutes() {
   const { token } = useToken();
 
-  console.log(token);
+  let { xxx } = useParams();
 
-  return token != "undefined" ? <Outlet /> : <Navigate to="/notfound" />;
+  console.log(xxx);
+
+  return xxx != "undefined" ? (
+    <Routes>
+      <Route element={<Rating />} path="/" />
+    </Routes>
+  ) : (
+    <Navigate to="/notfound" />
+  );
 }
