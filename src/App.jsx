@@ -26,8 +26,9 @@ export function App() {
         <Route element={<TokenRoutes />}>
           <Route element={<Rating />} path="/avaliacao/:token" />
           <Route element={<Thanks />} path="/thanks" />
-          <Route element={<NotFound />} path="*" />
         </Route>
+        
+        <Route element={<NotFound />} path="*" />
 
         <Route element={<Login />} path="/" />
       </Routes>
