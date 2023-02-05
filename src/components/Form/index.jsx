@@ -1,8 +1,9 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { useToken } from "../../hooks/useToken";
 import { db } from "../../services/firebaseConfig";
 import { Star } from "../Star";
 
@@ -14,6 +15,9 @@ const createFormSchema = Yup.object({
 
 export function Form() {
   const navigate = useNavigate();
+  const { token } = useParams();
+  const { isLoading, validateToken, updateTokenAsUsed } = useToken();
+
   const [collaborators, setCollaborators] = useState([]);
   const [services, setServices] = useState([]);
   const [name, setName] = useState("");
@@ -32,6 +36,10 @@ export function Form() {
   const answersCollectionRef = collection(db, "answers");
   const servicesCollectionRef = collection(db, "services");
   const collaboratorsCollectionRef = collection(db, "collaborators");
+
+  useEffect(() => {
+    validateToken(token);
+  }, [token, validateToken]);
 
   useEffect(() => {
     const getCollaborators = async () => {
@@ -103,10 +111,20 @@ export function Form() {
       });
   }
 
+  const handleUpdateTokenAsUsed = async () => {
+    await updateTokenAsUsed(token);
+  };
+
+  if (isLoading) {
+    return <div>Loading......</div>;
+  }
+
   return (
     <>
       <form id="form-rating" onSubmit={handleSubmitResult}>
         <h3>Por favor preencha a avaliação</h3>
+
+        <div>Seu token é: {token}</div>
 
         <div className="form-control">
           <label htmlFor="name">Nome:</label>
