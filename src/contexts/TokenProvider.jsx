@@ -64,7 +64,7 @@ export function TokenProvider({ children }) {
   );
 
   const getTokens = useCallback(async () => {
-    setTokens();
+    setTokens(tokens);
     setIsLoading(false);
   }, []);
 
