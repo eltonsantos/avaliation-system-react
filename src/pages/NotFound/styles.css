@@ -23,7 +23,7 @@
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  padding: 77px 55px 33px;
+  padding: 77px 55px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
@@ -237,7 +237,8 @@
 
 @media (max-width: 576px) {
   .wrap-login100 {
-    padding: 77px 15px 33px;
+    padding: 77px 55px;
+    text-align: center;
   }
 }
 
