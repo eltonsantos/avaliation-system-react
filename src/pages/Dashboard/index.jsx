@@ -34,7 +34,45 @@ const data = [
   },
 ];
 
-const colors = ["#00C49F", "#FFBB28", "#FF8042", "#E84C3D"];
+const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#E84C3D"];
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${payload?.[0]?.payload?.name} = ${payload[0].value} estrelas`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 export function Dashboard() {
   const [selectedQuestion, setSelectedQuestion] = useState("");
@@ -82,22 +120,24 @@ export function Dashboard() {
           ))}
         </select>
       </div>
-      <ResponsiveContainer height={400}>
+      <ResponsiveContainer height={550}>
         <PieChart>
           <Pie
             data={filteredData}
             dataKey="value"
             cx="50%"
             cy="50%"
-            outerRadius={80}
-            label
+            outerRadius={200}
+            labelLine={false}
+            label={renderCustomizedLabel}
+            fill="#8884d8"
           >
             {filteredData.map((entry, index) => (
-              <Cell key={index} fill={colors[index % colors.length]} />
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
           <Legend />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
         </PieChart>
       </ResponsiveContainer>
     </div>
