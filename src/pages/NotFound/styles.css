@@ -18,7 +18,7 @@
   background: #f2f2f2;
 }
 
-.wrap-login100 {
+.wrap-login100-notfound {
   width: 390px;
   background: #fff;
   border-radius: 10px;
@@ -237,7 +237,7 @@
 }
 
 @media (max-width: 576px) {
-  .wrap-login100 {
+  .wrap-login100-notfound {
     padding: 77px 55px;
     text-align: center;
   }

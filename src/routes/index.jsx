@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { Loading } from "../components/Loading";
 import { auth } from "../services/firebaseConfig";
 
 export function PrivateRoutes() {
@@ -20,7 +21,7 @@ export function PrivateRoutes() {
   }, []);
 
   if (isLoading) {
-    return "Loading......";
+    return <Loading />;
   }
 
   return currentUser ? <Outlet /> : <Navigate to="/" />;
