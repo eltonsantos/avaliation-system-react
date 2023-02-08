@@ -52,7 +52,7 @@ export function Admin() {
   async function handleCopy(token) {
     try {
       await navigator.clipboard.writeText(
-        location.host + "/avaliacao/" + token.id
+        "http://" + location.host + "/avaliacao/" + token.id
       );
       toast.success("Copiado!", {
         theme: "colored",
@@ -101,7 +101,7 @@ export function Admin() {
                         onClick={() => handleCopy(token)}
                         id="iconCopy"
                       />
-                      {window.location.host}/avaliacao/{token.id}
+                      https://{window.location.host}/avaliacao/{token.id}
                     </td>
                     <td>
                       {new Intl.DateTimeFormat("pt-BR").format(
