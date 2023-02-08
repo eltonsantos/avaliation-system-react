@@ -103,6 +103,8 @@ export function Form() {
         setAnswer4(0);
         setComment("");
 
+        updateTokenAsUsed(token);
+
         navigate("/thanks");
       })
       .catch((error) => {
@@ -111,10 +113,6 @@ export function Form() {
         });
       });
   }
-
-  const handleUpdateTokenAsUsed = async () => {
-    await updateTokenAsUsed(token);
-  };
 
   if (isLoading) {
     return <Loading />;
