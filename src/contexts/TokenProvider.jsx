@@ -1,14 +1,22 @@
 import {
+  collection,
+  doc as firebaseDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import {
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-
 import { useNavigate } from "react-router-dom";
+import { db } from "../services/firebaseConfig";
 
 export const TokenContext = createContext();
+
+const tokensCollectionRef = collection(db, "tokens");
 
 export function TokenProvider({ children }) {
   const navigate = useNavigate();
@@ -46,6 +54,17 @@ export function TokenProvider({ children }) {
     async (urlToken) => {
       if (!urlToken) return;
 
+      navigate("/thanks");
+
+      const tokenExists = tokens.find(
+        (firebaseToken) => firebaseToken.id === urlToken
+      );
+
+      if (!tokenExists) {
+        navigate("/not-found");
+        return;
+      }
+
       setTokens((prevTokens) =>
         prevTokens.map((firebaseToken) => {
           if (firebaseToken.id === urlToken) {
@@ -58,13 +77,20 @@ export function TokenProvider({ children }) {
         })
       );
 
-      navigate("/thanks");
+      // TODO: update abaixo ainda precisa ser testado
+      const tokenDoc = firebaseDoc(db, "tokens", tokenExists.tokenDocId);
+      await updateDoc(tokenDoc, { used: true });
     },
-    [navigate]
+    [navigate, tokens]
   );
 
   const getTokens = useCallback(async () => {
-    setTokens(tokens);
+    const data = await getDocs(tokensCollectionRef);
+    const firebaseTokens = data.docs.map((doc) => ({
+      ...doc.data(),
+      tokenDocId: doc.id,
+    }));
+    setTokens(firebaseTokens);
     setIsLoading(false);
   }, []);
 

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useToken } from "../../hooks/useToken";
 import { db } from "../../services/firebaseConfig";
+import { Loading } from "../Loading";
 import { Star } from "../Star";
 
 const createFormSchema = Yup.object({
@@ -116,7 +117,7 @@ export function Form() {
   };
 
   if (isLoading) {
-    return <div>Loading......</div>;
+    return <Loading />;
   }
 
   return (

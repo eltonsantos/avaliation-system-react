@@ -9,7 +9,6 @@ import { Rating } from "./pages/Rating";
 import { Service } from "./pages/Service";
 import { Thanks } from "./pages/Thanks";
 import { PrivateRoutes } from "./routes";
-import { TokenRoutes } from "./routes/token";
 
 import "./styles/global.css";
 
@@ -25,10 +24,8 @@ export function App() {
             <Route element={<Service />} path="/services" />
           </Route>
 
-          <Route element={<TokenRoutes />}>
-            <Route element={<Rating />} path="/avaliacao/:token" />
-            <Route element={<Thanks />} path="/thanks" />
-          </Route>
+          <Route element={<Rating />} path="/avaliacao/:token" />
+          <Route element={<Thanks />} path="/thanks" />
 
           <Route element={<NotFound />} path="*" />
 
