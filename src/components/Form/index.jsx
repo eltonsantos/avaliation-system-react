@@ -176,7 +176,7 @@ export function Form() {
             onRatingChanged={(newRating) => {
               setAnswer1(newRating);
               console.log(
-                `NEW RATING (${newRating}) DETECTED FOR 1.. SAVING TO DB`
+                `NEW RATING (${newRating}) DETECTED FOR 1. SAVING TO DB`
               );
             }}
           />
@@ -189,7 +189,7 @@ export function Form() {
             onRatingChanged={(newRating) => {
               setAnswer2(newRating);
               console.log(
-                `NEW RATING (${newRating}) DETECTED FOR 2.. SAVING TO DB`
+                `NEW RATING (${newRating}) DETECTED FOR 2. SAVING TO DB`
               );
             }}
           />
@@ -202,7 +202,7 @@ export function Form() {
             onRatingChanged={(newRating) => {
               setAnswer3(newRating);
               console.log(
-                `NEW RATING (${newRating}) DETECTED FOR 3.. SAVING TO DB`
+                `NEW RATING (${newRating}) DETECTED FOR 3. SAVING TO DB`
               );
             }}
           />
@@ -215,7 +215,7 @@ export function Form() {
             onRatingChanged={(newRating) => {
               setAnswer4(newRating);
               console.log(
-                `NEW RATING (${newRating}) DETECTED FOR 4.. SAVING TO DB`
+                `NEW RATING (${newRating}) DETECTED FOR 4. SAVING TO DB`
               );
             }}
           />

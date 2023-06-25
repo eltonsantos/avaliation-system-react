@@ -19,7 +19,12 @@ const data = [
     value: 4,
     date: "03/10/2022",
   },
-  { id: 2, name: "Foi de fácil entendimento?", value: 2, date: "02/04/2022" },
+  {
+    id: 2,
+    name: "Foi de fácil entendimento?",
+    value: 2,
+    date: "02/04/2022"
+  },
   {
     id: 3,
     name: "Gostou do serviço prestado?",
